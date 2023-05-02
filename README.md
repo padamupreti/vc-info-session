@@ -75,3 +75,7 @@ Cheatsheet
 
 ![Cheatsheet 1](./git_cheatsheet_1.jpg)
 ![Cheatsheet 2](./git_cheatsheet_2.jpg)
+
+## GitHub Git Cheatsheet
+
+[git cheatsheet by GitHub](https://education.github.com/git-cheat-sheet-education.pdf)
