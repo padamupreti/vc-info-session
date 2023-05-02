@@ -1,5 +1,10 @@
 # Git and GitHub Session Notes
 
+git was created by Linus Torvalds, the creator of Linux, when there was
+a need for free and open-source version control system for development
+of linux source tree. GitHub is, as its name implies, a hub of git
+repositories, or "repo(s)"
+
 Introducing terms:
 
 -   Version Control (Distributed Version Control System) -- tracking
