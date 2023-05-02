@@ -63,7 +63,7 @@ unset env
 
 ## Basic Workflow and Commands
 
-Most important commands are init, add, commit, push, pull, branch
+Most important commands are init, add, status, commit, push, pull, branch
 
 Workflow
 (Credit to [@NikkiSiapno on Twitter](https://twitter.com/NikkiSiapno/)):
