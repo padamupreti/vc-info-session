@@ -3,84 +3,83 @@
 git was created by Linus Torvalds, the creator of Linux, when there was
 a need for free and open-source version control system for development
 of linux source tree. GitHub is, as its name implies, a hub of git
-repositories, or "repo(s)"
+repositories, or "repo(s)", each of which contain source code tracked with git.
 
-Introducing terms:
+git allows for tracking changes and making edits safely maintaining history of
+updates along with rollback features to move back to prior state of repository.
 
--   Version Control (Distributed Version Control System) -- tracking
-    changes, collaboration and rollback changes
--   Repository -- collection of project files, code base
+GitHub allows sharing code and collaboration including letting others review changes.
 
-## Git Bash Installation
+## Setup Steps
 
--   Git Bash installation from
+-   Create account on GitHub
+
+-   Git Bash installation for Windows from
     [https://git-scm.com/download/win](https://git-scm.com/download/win)
-    installation will give git as well as git bash
 
-## Create account and setup SSH
+-   Install ensuring git command is accessible from Powershell and Command Prompt
 
-Create account and setup connection with SSH to GitHub (using Git Bash):
+-   Open Powershell as administrator
 
--   Generate Public/Private Key Pair
-    `ssh-keygen -t ed25519 -C "your_email@example.com"`
-    or
-    `ssh-keygen -t rsa -b 4096 -C "your_email@example.com"`
--   Start SSH agent in background
-    `eval "$(ssh-agent -s)"`
--   Add generated key to the agent
-    `ssh-add ~/.ssh/id_ed25519`
+-   Add configurations for git
+
+    ```
+    git config --global user.name "[username]"
+    git config --global user.email "[valid-email]" # can also be GitHub noreply email
+    git config --global color.ui auto
+    ```
+
+-   Generate public/private keypair (optionally use passphrase)
+
+    ```
+    ssh-keygen -t ed25519 -C "[valid-email]"
+    # or use ssh-keygen -t rsa -b 4096 -C "[valid-email]" if above fails
+    ```
+
+-   Setup SSH Agent
+
+    ```
+    Start-Service ssh-agent
+    ssh-add C:\path\to\your\ssh\key\id_ed25519
+    Set-Service ssh-agent -StartupType Automatic
+    ```
+
 -   Add public key to GitHub settings (`Settings > SSH and GPG keys > Add`)
-    `~/.ssh/id_ed25519.pub`
+
+    ```
+    cat C:\path\to\your\ssh\key\id_ed25519.pub
+    ```
+
 -   Test connection
-    `ssh -T git@github.com`
--   Add to `~/.bashrc` in Git Bash
-
-```bash
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_ed25519
-```
-
-or from GitHub documentation:
-
-```bash
-env=~/.ssh/agent.env
-
-agent_load_env () { test -f "$env" && . "$env" >| /dev/null ; }
-
-agent_start () {
-    (umask 077; ssh-agent >| "$env")
-    . "$env" >| /dev/null ; }
-
-agent_load_env
-
-# agent_run_state: 0=agent running w/ key; 1=agent w/o key; 2=agent not running
-agent_run_state=$(ssh-add -l >| /dev/null 2>&1; echo $?)
-
-if [ ! "$SSH_AUTH_SOCK" ] || [ $agent_run_state = 2 ]; then
-    agent_start
-    ssh-add
-elif [ "$SSH_AUTH_SOCK" ] && [ $agent_run_state = 1 ]; then
-    ssh-add
-fi
-
-unset env
-```
+    ```
+    ssh -T git@github.com
+    ```
 
 ## Basic Workflow and Commands
 
-Most important commands are init, add, status, commit, push, pull, branch
-
-Workflow
-(Credit to [@NikkiSiapno on Twitter](https://twitter.com/NikkiSiapno/)):
+Most important commands are init, add, status, commit, push, pull, branch.
 
 ![Git Workflow](./git_workflow.jpg)
 
-Cheatsheet
-(Credit to [@Prathkum on Twitter](https://twitter.com/Prathkum)):
+Cheatsheet:
 
 ![Cheatsheet 1](./git_cheatsheet_1.jpg)
 ![Cheatsheet 2](./git_cheatsheet_2.jpg)
 
-## GitHub Git Cheatsheet
+Cheatsheet by GitHub Education:
 
 [git cheatsheet by GitHub](https://education.github.com/git-cheat-sheet-education.pdf)
+
+## Collaboration in Team
+
+Teams can collaborate by keeping local copy on each team member's machine
+and maintaining central repository on GitHub for sync.
+
+### Contributors vs Pull Requests
+
+There are two ways to collaborate on the same repository. Adding contributors
+or handling pull requests. Added contributors have direct access and can make
+changes without requiring any review from repository owner/maintainers. In contrast, pull
+request gives the repository maintainers control to review changes, suggest
+modifications and ultimately the authority on whether to accept or decline
+change request.
