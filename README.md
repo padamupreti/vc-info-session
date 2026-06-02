@@ -12,16 +12,16 @@ GitHub allows sharing code and collaboration including letting others review cha
 
 ## Setup Steps
 
--   Create account on GitHub
+- Create account on GitHub
 
--   Git Bash installation for Windows from
-    [https://git-scm.com/download/win](https://git-scm.com/download/win)
+- Git Bash installation for Windows from
+  [https://git-scm.com/download/win](https://git-scm.com/download/win)
 
--   Install ensuring git command is accessible from Powershell and Command Prompt
+- Install ensuring git command is accessible from Powershell and Command Prompt
 
--   Open Powershell as administrator
+- Open Powershell as administrator
 
--   Add configurations for git
+- Add configurations for git
 
     ```
     git config --global user.name "[username]"
@@ -29,14 +29,14 @@ GitHub allows sharing code and collaboration including letting others review cha
     git config --global color.ui auto
     ```
 
--   Generate public/private keypair (optionally use passphrase)
+- Generate public/private keypair (optionally use passphrase)
 
     ```
     ssh-keygen -t ed25519 -C "[valid-email]"
     # or use ssh-keygen -t rsa -b 4096 -C "[valid-email]" if above fails
     ```
 
--   Setup SSH Agent
+- Setup SSH Agent
 
     ```
     Start-Service ssh-agent
@@ -44,13 +44,21 @@ GitHub allows sharing code and collaboration including letting others review cha
     Set-Service ssh-agent -StartupType Automatic
     ```
 
--   Add public key to GitHub settings (`Settings > SSH and GPG keys > Add`)
+- Add public key to GitHub settings (`Settings > SSH and GPG keys > Add`)
 
     ```
     cat C:\path\to\your\ssh\key\id_ed25519.pub
     ```
 
--   Test connection
+- Modify `~/.ssh/config` to include the git user and identity file
+
+    ```
+    Host github.com
+        User git
+        IdentityFile ~/.ssh/id_ed25519
+    ```
+
+- Test connection
     ```
     ssh -T git@github.com
     ```
